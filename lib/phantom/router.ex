@@ -743,14 +743,8 @@ defmodule Phantom.Router do
     {:ok, protocol_version}
   end
 
-  def validate_protocol(unsupported_protocol, session) do
-    {:error,
-     Request.invalid_params(
-       data: %{
-         supported: @supported_protocol_versions,
-         requested: unsupported_protocol
-       }
-     ), session}
+  def validate_protocol(_unsupported_protocol, _session) do
+    {:ok, List.last(@supported_protocol_versions)}
   end
 
   @doc false
